@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="card-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </div>
+          <h1 class="title">Email Hub</h1>
+        </div>
+        <div class="header-right">
+          <span id="unread-badge" class="badge hidden">0</span>
+          <button id="refresh-btn" class="btn-icon" title="Actualiser">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="content">
+        <!-- Connection required state -->
+        <div id="connect-state" class="state-container hidden">
+          <div class="state-icon-wrapper accent">
+            <svg class="state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+              <polyline points="10 17 15 12 10 7"/>
+              <line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+          </div>
+          <p class="state-title">Connexion requise</p>
+          <p class="state-description">Connectez votre compte Google pour afficher vos emails Gmail</p>
+          <button id="connect-btn" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 0 10 10H12V2z"/>
+              <path d="M12 2a10 10 0 0 1 10 10"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+            Connecter Gmail
+          </button>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loading-state" class="state-container hidden">
+          <div class="spinner-wrapper">
+            <div class="spinner"></div>
+          </div>
+          <p class="state-title">Chargement</p>
+          <p class="state-description">Récupération de vos emails...</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="error-state" class="state-container hidden">
+          <div class="state-icon-wrapper error">
+            <svg class="state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <p class="state-title">Une erreur est survenue</p>
+          <p id="error-message" class="state-description">Impossible de charger vos emails</p>
+          <button id="retry-btn" class="btn-secondary">Réessayer</button>
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="state-container hidden">
+          <div class="state-icon-wrapper">
+            <svg class="state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <p class="state-title">Aucun email</p>
+          <p class="state-description">Votre boîte de réception est vide. Les nouveaux messages apparaîtront ici.</p>
+        </div>
+
+        <!-- Email list -->
+        <div id="email-list" class="email-list hidden"></div>
+
+        <!-- Email detail view -->
+        <div id="email-detail" class="email-detail hidden">
+          <button id="back-btn" class="btn-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Retour
+          </button>
+          <div id="email-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/email-parser.js"></script>
+  <script src="lib/gmail-api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

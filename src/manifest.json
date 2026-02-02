@@ -1,0 +1,164 @@
+{
+  "sdkVersion": "2.13.0",
+  "name": "Email Hub",
+  "version": "1.0.0",
+  "description": "Centralisez vos emails Gmail sur votre bureau",
+  "author": "rayandu924",
+  "type": "widget",
+  "categories": ["productivity", "communication"],
+
+  "oauth": {
+    "required": [
+      {
+        "provider": "google",
+        "scopes": [
+          "https://www.googleapis.com/auth/gmail.readonly",
+          "https://www.googleapis.com/auth/gmail.labels"
+        ],
+        "reason": "Afficher vos emails et labels Gmail"
+      }
+    ],
+    "optional": [
+      {
+        "provider": "google",
+        "scopes": ["https://www.googleapis.com/auth/gmail.modify"],
+        "reason": "Permettre les actions (archiver, marquer lu, supprimer)"
+      }
+    ]
+  },
+
+  "capabilities": {
+    "hotReload": true,
+    "systemEvents": ["theme:change", "visibility:change"]
+  },
+
+  "permissions": {
+    "storage": { "quota": 1024 }
+  },
+
+  "settings": {
+    "display": {
+      "type": "section",
+      "label": "Affichage"
+    },
+    "maxEmails": {
+      "type": "range",
+      "label": "Nombre d'emails",
+      "description": "Nombre maximum d'emails affichés",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 10
+    },
+    "refreshInterval": {
+      "type": "range",
+      "label": "Actualisation (minutes)",
+      "description": "Fréquence de rafraîchissement automatique",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "default": 5
+    },
+    "showUnreadOnly": {
+      "type": "boolean",
+      "label": "Afficher seulement les non-lus",
+      "default": false
+    },
+    "labelFilter": {
+      "type": "select",
+      "label": "Filtrer par label",
+      "options": [
+        { "value": "INBOX", "label": "Boîte de réception" },
+        { "value": "STARRED", "label": "Messages suivis" },
+        { "value": "IMPORTANT", "label": "Important" },
+        { "value": "SENT", "label": "Messages envoyés" },
+        { "value": "DRAFT", "label": "Brouillons" },
+        { "value": "ALL", "label": "Tous les messages" }
+      ],
+      "default": "INBOX"
+    },
+    "appearance": {
+      "type": "section",
+      "label": "Apparence"
+    },
+    "theme": {
+      "type": "select",
+      "label": "Thème",
+      "options": [
+        { "value": "auto", "label": "Auto (système)" },
+        { "value": "dark", "label": "Sombre" },
+        { "value": "light", "label": "Clair" }
+      ],
+      "default": "auto"
+    },
+    "cardColor": {
+      "type": "color",
+      "label": "Couleur de fond",
+      "description": "Couleur de fond de la carte",
+      "default": "#ffffff"
+    },
+    "cardOpacity": {
+      "type": "range",
+      "label": "Opacité du fond",
+      "description": "Transparence de la carte (0 = transparent, 100 = opaque)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 100
+    },
+    "cardBorderRadius": {
+      "type": "range",
+      "label": "Arrondis",
+      "description": "Rayon des coins de la carte",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 20
+    },
+    "accentColor": {
+      "type": "color",
+      "label": "Couleur d'accent",
+      "description": "Couleur des badges et boutons",
+      "default": "#007aff"
+    },
+    "cardBlur": {
+      "type": "range",
+      "label": "Flou (glassmorphism)",
+      "description": "Effet de flou derrière la carte",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 0
+    },
+    "compactMode": {
+      "type": "boolean",
+      "label": "Mode compact",
+      "description": "Réduit l'espacement pour afficher plus d'emails",
+      "default": false
+    },
+    "showAvatar": {
+      "type": "boolean",
+      "label": "Afficher les avatars",
+      "default": true
+    },
+    "showSnippet": {
+      "type": "boolean",
+      "label": "Afficher l'aperçu",
+      "description": "Affiche un extrait du contenu de l'email",
+      "default": true
+    },
+    "showShadow": {
+      "type": "boolean",
+      "label": "Afficher l'ombre",
+      "description": "Ombre portée sous la carte",
+      "default": true
+    }
+  },
+
+  "defaultLayout": {
+    "xPercent": 75,
+    "yPercent": 5,
+    "widthPercent": 22,
+    "heightPercent": 45
+  }
+}
