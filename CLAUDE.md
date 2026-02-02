@@ -36,14 +36,15 @@ Ce projet est un addon pour l'application MyWallPaper qui centralise les emails 
 ## Structure de l'addon
 
 ```
-src/
+/
 ├── manifest.json       # Configuration addon + OAuth + Settings
 ├── index.html          # Point d'entrée HTML
 ├── styles.css          # Styles (dark/light theme)
 ├── app.js              # Logique principale
-└── lib/
-    ├── gmail-api.js    # Wrapper API Gmail via OAuth proxy
-    └── email-parser.js # Parser emails MIME/Base64
+├── lib/
+│   ├── gmail-api.js    # Wrapper API Gmail via OAuth proxy
+│   └── email-parser.js # Parser emails MIME/Base64
+└── docs/               # Documentation
 ```
 
 ## Utilisation de l'API Gmail
@@ -65,5 +66,5 @@ cd /home/rayandu924/actions-runner/_work/rust-k8s-microservices/rust-k8s-microse
 ls /home/rayandu924/actions-runner/_work/rust-k8s-microservices/rust-k8s-microservices/packages/addon-sdk/examples/
 
 # Tester l'addon localement (serveur HTTP simple)
-cd /home/rayandu924/email-hub/src && python3 -m http.server 8080
+cd /home/rayandu924/email-hub && npx serve . --cors -l 5174
 ```
