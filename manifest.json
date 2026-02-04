@@ -1,7 +1,7 @@
 {
-  "sdkVersion": "2.13.0",
+  "sdkVersion": "2.17.0",
   "name": "Email Hub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Centralisez vos emails Gmail sur votre bureau",
   "author": "rayandu924",
   "type": "widget",
