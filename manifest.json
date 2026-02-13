@@ -1,12 +1,16 @@
 {
-  "sdkVersion": "2.17.0",
+  "sdkVersion": "2.1",
   "name": "Email Hub",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Centralisez vos emails Gmail sur votre bureau",
   "author": "rayandu924",
   "type": "widget",
-  "categories": ["productivity", "communication"],
-
+  "renderMode": "native",
+  "entry": "index.js",
+  "categories": [
+    "productivity",
+    "communication"
+  ],
   "oauth": {
     "required": [
       {
@@ -21,21 +25,25 @@
     "optional": [
       {
         "provider": "google",
-        "scopes": ["https://www.googleapis.com/auth/gmail.modify"],
+        "scopes": [
+          "https://www.googleapis.com/auth/gmail.modify"
+        ],
         "reason": "Permettre les actions (archiver, marquer lu, supprimer)"
       }
     ]
   },
-
   "capabilities": {
     "hotReload": true,
-    "systemEvents": ["theme:change", "visibility:change"]
+    "systemEvents": [
+      "theme:change",
+      "visibility:change"
+    ]
   },
-
   "permissions": {
-    "storage": { "quota": 1024 }
+    "storage": {
+      "quota": 1024
+    }
   },
-
   "settings": {
     "display": {
       "type": "section",
@@ -44,7 +52,7 @@
     "maxEmails": {
       "type": "range",
       "label": "Nombre d'emails",
-      "description": "Nombre maximum d'emails affichés",
+      "description": "Nombre maximum d'emails affich\u00e9s",
       "min": 5,
       "max": 50,
       "step": 5,
@@ -53,7 +61,7 @@
     "refreshInterval": {
       "type": "range",
       "label": "Actualisation (minutes)",
-      "description": "Fréquence de rafraîchissement automatique",
+      "description": "Fr\u00e9quence de rafra\u00eechissement automatique",
       "min": 1,
       "max": 60,
       "step": 1,
@@ -68,12 +76,30 @@
       "type": "select",
       "label": "Filtrer par label",
       "options": [
-        { "value": "INBOX", "label": "Boîte de réception" },
-        { "value": "STARRED", "label": "Messages suivis" },
-        { "value": "IMPORTANT", "label": "Important" },
-        { "value": "SENT", "label": "Messages envoyés" },
-        { "value": "DRAFT", "label": "Brouillons" },
-        { "value": "ALL", "label": "Tous les messages" }
+        {
+          "value": "INBOX",
+          "label": "Bo\u00eete de r\u00e9ception"
+        },
+        {
+          "value": "STARRED",
+          "label": "Messages suivis"
+        },
+        {
+          "value": "IMPORTANT",
+          "label": "Important"
+        },
+        {
+          "value": "SENT",
+          "label": "Messages envoy\u00e9s"
+        },
+        {
+          "value": "DRAFT",
+          "label": "Brouillons"
+        },
+        {
+          "value": "ALL",
+          "label": "Tous les messages"
+        }
       ],
       "default": "INBOX"
     },
@@ -83,11 +109,20 @@
     },
     "theme": {
       "type": "select",
-      "label": "Thème",
+      "label": "Th\u00e8me",
       "options": [
-        { "value": "auto", "label": "Auto (système)" },
-        { "value": "dark", "label": "Sombre" },
-        { "value": "light", "label": "Clair" }
+        {
+          "value": "auto",
+          "label": "Auto (syst\u00e8me)"
+        },
+        {
+          "value": "dark",
+          "label": "Sombre"
+        },
+        {
+          "value": "light",
+          "label": "Clair"
+        }
       ],
       "default": "auto"
     },
@@ -99,7 +134,7 @@
     },
     "cardOpacity": {
       "type": "range",
-      "label": "Opacité du fond",
+      "label": "Opacit\u00e9 du fond",
       "description": "Transparence de la carte (0 = transparent, 100 = opaque)",
       "min": 0,
       "max": 100,
@@ -124,7 +159,7 @@
     "cardBlur": {
       "type": "range",
       "label": "Flou (glassmorphism)",
-      "description": "Effet de flou derrière la carte",
+      "description": "Effet de flou derri\u00e8re la carte",
       "min": 0,
       "max": 30,
       "step": 2,
@@ -133,7 +168,7 @@
     "compactMode": {
       "type": "boolean",
       "label": "Mode compact",
-      "description": "Réduit l'espacement pour afficher plus d'emails",
+      "description": "R\u00e9duit l'espacement pour afficher plus d'emails",
       "default": false
     },
     "showAvatar": {
@@ -143,18 +178,17 @@
     },
     "showSnippet": {
       "type": "boolean",
-      "label": "Afficher l'aperçu",
+      "label": "Afficher l'aper\u00e7u",
       "description": "Affiche un extrait du contenu de l'email",
       "default": true
     },
     "showShadow": {
       "type": "boolean",
       "label": "Afficher l'ombre",
-      "description": "Ombre portée sous la carte",
+      "description": "Ombre port\u00e9e sous la carte",
       "default": true
     }
   },
-
   "defaultLayout": {
     "xPercent": 75,
     "yPercent": 5,
