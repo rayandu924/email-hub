@@ -1,11 +1,9 @@
 {
-  "sdkVersion": "2.1",
   "name": "Email Hub",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Centralisez vos emails Gmail sur votre bureau",
-  "author": "rayandu924",
+  "author": "MyWallpaper Community",
   "type": "widget",
-  "renderMode": "native",
   "entry": "index.js",
   "categories": [
     "productivity",
@@ -32,16 +30,15 @@
       }
     ]
   },
-  "capabilities": {
-    "hotReload": true,
-    "systemEvents": [
-      "theme:change",
-      "visibility:change"
-    ]
-  },
   "permissions": {
     "storage": {
       "quota": 1024
+    },
+    "network": {
+      "domains": [
+        "www.googleapis.com",
+        "gmail.googleapis.com"
+      ]
     }
   },
   "settings": {
@@ -52,7 +49,7 @@
     "maxEmails": {
       "type": "range",
       "label": "Nombre d'emails",
-      "description": "Nombre maximum d'emails affich\u00e9s",
+      "description": "Nombre maximum d'emails affichés",
       "min": 5,
       "max": 50,
       "step": 5,
@@ -61,7 +58,7 @@
     "refreshInterval": {
       "type": "range",
       "label": "Actualisation (minutes)",
-      "description": "Fr\u00e9quence de rafra\u00eechissement automatique",
+      "description": "Fréquence de rafraîchissement automatique",
       "min": 1,
       "max": 60,
       "step": 1,
@@ -78,7 +75,7 @@
       "options": [
         {
           "value": "INBOX",
-          "label": "Bo\u00eete de r\u00e9ception"
+          "label": "Boîte de réception"
         },
         {
           "value": "STARRED",
@@ -90,7 +87,7 @@
         },
         {
           "value": "SENT",
-          "label": "Messages envoy\u00e9s"
+          "label": "Messages envoyés"
         },
         {
           "value": "DRAFT",
@@ -109,11 +106,11 @@
     },
     "theme": {
       "type": "select",
-      "label": "Th\u00e8me",
+      "label": "Thème",
       "options": [
         {
           "value": "auto",
-          "label": "Auto (syst\u00e8me)"
+          "label": "Auto (système)"
         },
         {
           "value": "dark",
@@ -134,7 +131,7 @@
     },
     "cardOpacity": {
       "type": "range",
-      "label": "Opacit\u00e9 du fond",
+      "label": "Opacité du fond",
       "description": "Transparence de la carte (0 = transparent, 100 = opaque)",
       "min": 0,
       "max": 100,
@@ -159,7 +156,7 @@
     "cardBlur": {
       "type": "range",
       "label": "Flou (glassmorphism)",
-      "description": "Effet de flou derri\u00e8re la carte",
+      "description": "Effet de flou derrière la carte",
       "min": 0,
       "max": 30,
       "step": 2,
@@ -168,7 +165,7 @@
     "compactMode": {
       "type": "boolean",
       "label": "Mode compact",
-      "description": "R\u00e9duit l'espacement pour afficher plus d'emails",
+      "description": "Réduit l'espacement pour afficher plus d'emails",
       "default": false
     },
     "showAvatar": {
@@ -178,14 +175,14 @@
     },
     "showSnippet": {
       "type": "boolean",
-      "label": "Afficher l'aper\u00e7u",
+      "label": "Afficher l'aperçu",
       "description": "Affiche un extrait du contenu de l'email",
       "default": true
     },
     "showShadow": {
       "type": "boolean",
       "label": "Afficher l'ombre",
-      "description": "Ombre port\u00e9e sous la carte",
+      "description": "Ombre portée sous la carte",
       "default": true
     }
   },
