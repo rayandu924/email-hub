@@ -1,6 +1,6 @@
 {
   "name": "mywallpaper-addon-email-hub",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "@types/react": "^19.0.0",
     "react": "^19.0.0",
     "typescript": "^5.7.0",
-    "vite": "^6.0.0"
+    "vite": "^7.3.2",
+    "@mywallpaper/vite-plugin": "file:../MyWallpaper/packages/vite-plugin"
   }
 }

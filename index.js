@@ -1,6 +1,26 @@
-import { jsxs as c, jsx as o, Fragment as W } from "react/jsx-runtime";
-import { useState as b, useRef as D, useMemo as R, useCallback as y, useEffect as w } from "react";
-import { useOAuth as $, useTheme as q, useSettings as N } from "@mywallpaper/sdk-react";
+const __MYWALLPAPER_WIDGET_RUNTIME_CONTRACT__ = "1";
+if (!__canvasRuntime) {
+      throw new Error('Canvas runtime globals are unavailable');
+    }
+if (!__canvasRuntime.react || !__canvasRuntime.reactJsxRuntime || !__canvasRuntime.sdkReact || !__canvasRuntime.sdkContracts || !__canvasRuntime.sdkPermissions) {
+      throw new Error('Canvas runtime globals are unavailable');
+    }
+const __canvasRuntimeReact = __canvasRuntime.react;
+const __canvasRuntimeJsxRuntime = __canvasRuntime.reactJsxRuntime;
+const __canvasRuntimeSdk = __canvasRuntime.sdkReact;
+const __canvasRuntimeSdkContracts = __canvasRuntime.sdkContracts;
+const __canvasRuntimeSdkPermissions = __canvasRuntime.sdkPermissions;
+const s = __canvasRuntimeJsxRuntime.jsxs;
+const i = __canvasRuntimeJsxRuntime.jsx;
+const W = __canvasRuntimeJsxRuntime.Fragment;
+const b = __canvasRuntimeReact.useState;
+const D = __canvasRuntimeReact.useRef;
+const R = __canvasRuntimeReact.useMemo;
+const y = __canvasRuntimeReact.useCallback;
+const w = __canvasRuntimeReact.useEffect;
+const $ = __canvasRuntimeSdk.useOAuth;
+const q = __canvasRuntimeSdk.useTheme;
+const N = __canvasRuntimeSdk.useSettings;
 function A(e) {
   if (!e) return "";
   try {
@@ -13,25 +33,23 @@ function A(e) {
   }
 }
 function H(e, t) {
-  var n;
-  for (const r of e) {
-    if (r.parts) {
-      H(r.parts, t);
+  for (const n of e) {
+    if (n.parts) {
+      H(n.parts, t);
       continue;
     }
-    if (!(r.filename && r.filename.length > 0) && (n = r.body) != null && n.data) {
-      const i = A(r.body.data);
-      r.mimeType === "text/plain" && !t.text ? t.text = i : r.mimeType === "text/html" && !t.html && (t.html = i);
+    if (!(n.filename && n.filename.length > 0) && n.body?.data) {
+      const r = A(n.body.data);
+      n.mimeType === "text/plain" && !t.text ? t.text = r : n.mimeType === "text/html" && !t.html && (t.html = r);
     }
   }
 }
 function _(e) {
-  var n;
   const t = { text: "", html: "" };
   if (!e) return t;
-  if ((n = e.body) != null && n.data) {
-    const r = A(e.body.data);
-    return e.mimeType === "text/html" ? t.html = r : t.text = r, t;
+  if (e.body?.data) {
+    const n = A(e.body.data);
+    return e.mimeType === "text/html" ? t.html = n : t.text = n, t;
   }
   return e.parts && H(e.parts, t), t;
 }
@@ -63,29 +81,28 @@ function z(e) {
 function V(e) {
   const t = {}, n = ["from", "to", "cc", "bcc", "subject", "date", "reply-to", "message-id"];
   for (const r of e) {
-    const i = r.name.toLowerCase();
-    n.includes(i) && (t[i] = r.value);
+    const o = r.name.toLowerCase();
+    n.includes(o) && (t[o] = r.value);
   }
   return t;
 }
 function j(e, t) {
-  var n, r;
-  for (const i of e) {
-    if (i.parts) {
-      j(i.parts, t);
+  for (const n of e) {
+    if (n.parts) {
+      j(n.parts, t);
       continue;
     }
-    i.filename && i.filename.length > 0 && t.push({
-      id: (n = i.body) == null ? void 0 : n.attachmentId,
-      filename: i.filename,
-      mimeType: i.mimeType,
-      size: ((r = i.body) == null ? void 0 : r.size) || 0
+    n.filename && n.filename.length > 0 && t.push({
+      id: n.body?.attachmentId,
+      filename: n.filename,
+      mimeType: n.mimeType,
+      size: n.body?.size || 0
     });
   }
 }
 function X(e) {
   const t = [];
-  return e != null && e.parts && j(e.parts, t), t;
+  return e?.parts && j(e.parts, t), t;
 }
 function B(e) {
   if (!e) return "?";
@@ -100,12 +117,11 @@ function Q(e) {
   const t = /* @__PURE__ */ new Date(), n = t.getTime() - e.getTime(), r = 1440 * 60 * 1e3;
   if (n < r && e.getDate() === t.getDate())
     return e.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-  const i = new Date(t.getTime() - r);
-  return e.getDate() === i.getDate() && e.getMonth() === i.getMonth() ? "Hier" : e.getFullYear() === t.getFullYear() ? e.toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : e.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
+  const o = new Date(t.getTime() - r);
+  return e.getDate() === o.getDate() && e.getMonth() === o.getMonth() ? "Hier" : e.getFullYear() === t.getFullYear() ? e.toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : e.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
 }
 function J(e) {
-  var i;
-  const t = V(((i = e.payload) == null ? void 0 : i.headers) || []), n = _(e.payload), r = e.labelIds || [];
+  const t = V(e.payload?.headers || []), n = _(e.payload), r = e.labelIds || [];
   return {
     id: e.id,
     threadId: e.threadId,
@@ -138,25 +154,25 @@ const K = "/gmail/v1/users/me", U = [
   "https://www.googleapis.com/auth/gmail.modify"
 ];
 async function I(e, t, n = {}) {
-  const r = `${K}${t}`, i = await e.request("google", r, {
+  const r = `${K}${t}`, o = await e.request("google", r, {
     method: n.method || "GET",
     body: n.body,
     requiredScopes: U
   });
-  if (i.status >= 400)
-    throw new Error(`Gmail API error: ${i.status}`);
-  return i.data;
+  if (o.status >= 400)
+    throw new Error(`Gmail API error: ${o.status}`);
+  return o.data;
 }
 async function ee(e, t = {}) {
   const n = new URLSearchParams();
-  t.maxResults && n.set("maxResults", String(t.maxResults)), t.query && n.set("q", t.query), t.labelIds && t.labelIds.forEach((s) => n.append("labelIds", s));
-  const r = n.toString(), i = `/messages${r ? `?${r}` : ""}`, a = await I(e, i);
+  t.maxResults && n.set("maxResults", String(t.maxResults)), t.query && n.set("q", t.query), t.labelIds && t.labelIds.forEach((c) => n.append("labelIds", c));
+  const r = n.toString(), o = `/messages${r ? `?${r}` : ""}`, a = await I(e, o);
   if (!a.messages || a.messages.length === 0)
     return [];
-  const f = a.messages.map((s) => s.id);
+  const u = a.messages.map((c) => c.id);
   return (await Promise.all(
-    f.map(
-      (s) => I(e, `/messages/${s}?format=full`)
+    u.map(
+      (c) => I(e, `/messages/${c}?format=full`)
     )
   )).map(J);
 }
@@ -186,16 +202,16 @@ async function re(e) {
 }
 function ie(e) {
   return R(() => {
-    const t = e === "dark", n = t ? "#f5f5f7" : "#1d1d1f", r = t ? "#98989d" : "#86868b", i = t ? "#636366" : "#aeaeb2", a = t ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)", f = t ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.06)", d = t ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", s = t ? "#1c1c1e" : "#ffffff", h = "#007aff", S = h;
+    const t = e === "dark", n = t ? "#f5f5f7" : "#1d1d1f", r = t ? "#98989d" : "#86868b", o = t ? "#636366" : "#aeaeb2", a = t ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)", u = t ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.06)", f = t ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", c = t ? "#1c1c1e" : "#ffffff", h = "#007aff", S = h;
     return {
       isDark: t,
       textPrimary: n,
       textSecondary: r,
-      textTertiary: i,
+      textTertiary: o,
       surface: a,
-      surfaceHover: f,
-      border: d,
-      bg: s,
+      surfaceHover: u,
+      border: f,
+      bg: c,
       accent: h,
       unreadDot: S,
       container: {
@@ -205,7 +221,7 @@ function ie(e) {
         flexDirection: "column",
         fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
         color: n,
-        background: s,
+        background: c,
         borderRadius: 16,
         overflow: "hidden",
         boxSizing: "border-box"
@@ -225,7 +241,7 @@ function ie(e) {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "12px 16px",
-        borderBottom: `1px solid ${d}`,
+        borderBottom: `1px solid ${f}`,
         flexShrink: 0
       },
       headerTitle: {
@@ -272,7 +288,7 @@ function ie(e) {
         padding: "12px 16px",
         gap: 12,
         cursor: "pointer",
-        borderBottom: `1px solid ${d}`,
+        borderBottom: `1px solid ${f}`,
         background: "transparent",
         transition: "background 0.15s",
         fontWeight: p ? 600 : 400
@@ -312,7 +328,7 @@ function ie(e) {
       }),
       emailDate: {
         fontSize: 12,
-        color: i,
+        color: o,
         flexShrink: 0,
         marginLeft: 8
       },
@@ -354,7 +370,7 @@ function ie(e) {
       },
       detailHeader: {
         padding: "16px",
-        borderBottom: `1px solid ${d}`,
+        borderBottom: `1px solid ${f}`,
         flexShrink: 0
       },
       detailSubject: {
@@ -389,11 +405,11 @@ function ie(e) {
       },
       detailTo: {
         fontSize: 12,
-        color: i
+        color: o
       },
       detailDate: {
         fontSize: 12,
-        color: i,
+        color: o,
         marginLeft: "auto",
         flexShrink: 0
       },
@@ -427,7 +443,7 @@ function ie(e) {
         justifyContent: "center",
         padding: "8px 16px",
         borderRadius: 10,
-        border: `1px solid ${d}`,
+        border: `1px solid ${f}`,
         backgroundColor: "transparent",
         color: r,
         fontSize: 13,
@@ -437,7 +453,7 @@ function ie(e) {
       spinner: {
         width: 32,
         height: 32,
-        border: `3px solid ${d}`,
+        border: `3px solid ${f}`,
         borderTopColor: h,
         borderRadius: "50%",
         animation: "email-hub-spin 0.8s linear infinite"
@@ -460,37 +476,37 @@ function ie(e) {
   }, [e]);
 }
 function oe({ s: e }) {
-  return /* @__PURE__ */ c(W, { children: [
-    /* @__PURE__ */ o("style", { children: "@keyframes email-hub-spin { to { transform: rotate(360deg); } }" }),
-    /* @__PURE__ */ o("div", { style: e.spinner })
+  return /* @__PURE__ */ s(W, { children: [
+    /* @__PURE__ */ i("style", { children: "@keyframes email-hub-spin { to { transform: rotate(360deg); } }" }),
+    /* @__PURE__ */ i("div", { style: e.spinner })
   ] });
 }
 function ae({
   s: e,
   onConnect: t
 }) {
-  return /* @__PURE__ */ c("div", { style: e.centerScreen, children: [
-    /* @__PURE__ */ o("div", { style: { fontSize: 48, opacity: 0.3 }, children: "✉" }),
-    /* @__PURE__ */ o("div", { style: { fontSize: 17, fontWeight: 600, color: e.textPrimary }, children: "Email Hub" }),
-    /* @__PURE__ */ o("div", { style: e.messageText, children: "Connectez votre compte Gmail pour afficher vos emails." }),
-    /* @__PURE__ */ o("button", { style: e.primaryBtn, onClick: t, children: "Connecter Gmail" })
+  return /* @__PURE__ */ s("div", { style: e.centerScreen, children: [
+    /* @__PURE__ */ i("div", { style: { fontSize: 48, opacity: 0.3 }, children: "✉" }),
+    /* @__PURE__ */ i("div", { style: { fontSize: 17, fontWeight: 600, color: e.textPrimary }, children: "Email Hub" }),
+    /* @__PURE__ */ i("div", { style: e.messageText, children: "Connectez votre compte Gmail pour afficher vos emails." }),
+    /* @__PURE__ */ i("button", { style: e.primaryBtn, onClick: t, children: "Connecter Gmail" })
   ] });
 }
 function le({ s: e }) {
-  return /* @__PURE__ */ c("div", { style: e.centerScreen, children: [
-    /* @__PURE__ */ o(oe, { s: e }),
-    /* @__PURE__ */ o("div", { style: e.messageText, children: "Chargement des emails..." })
+  return /* @__PURE__ */ s("div", { style: e.centerScreen, children: [
+    /* @__PURE__ */ i(oe, { s: e }),
+    /* @__PURE__ */ i("div", { style: e.messageText, children: "Chargement des emails..." })
   ] });
 }
 function se({
   s: e,
   onRefresh: t
 }) {
-  return /* @__PURE__ */ c("div", { style: e.centerScreen, children: [
-    /* @__PURE__ */ o("div", { style: e.emptyIcon, children: "📫" }),
-    /* @__PURE__ */ o("div", { style: { fontSize: 15, fontWeight: 600, color: e.textPrimary }, children: "Aucun email" }),
-    /* @__PURE__ */ o("div", { style: e.messageText, children: "Votre boite de reception est vide." }),
-    /* @__PURE__ */ o("button", { style: e.secondaryBtn, onClick: t, children: "Actualiser" })
+  return /* @__PURE__ */ s("div", { style: e.centerScreen, children: [
+    /* @__PURE__ */ i("div", { style: e.emptyIcon, children: "📫" }),
+    /* @__PURE__ */ i("div", { style: { fontSize: 15, fontWeight: 600, color: e.textPrimary }, children: "Aucun email" }),
+    /* @__PURE__ */ i("div", { style: e.messageText, children: "Votre boite de reception est vide." }),
+    /* @__PURE__ */ i("button", { style: e.secondaryBtn, onClick: t, children: "Actualiser" })
   ] });
 }
 function ce({
@@ -498,11 +514,11 @@ function ce({
   message: t,
   onRetry: n
 }) {
-  return /* @__PURE__ */ c("div", { style: e.centerScreen, children: [
-    /* @__PURE__ */ o("div", { style: e.errorIcon, children: "⚠" }),
-    /* @__PURE__ */ o("div", { style: { fontSize: 15, fontWeight: 600, color: e.textPrimary }, children: "Erreur" }),
-    /* @__PURE__ */ o("div", { style: e.messageText, children: t }),
-    /* @__PURE__ */ o("button", { style: e.secondaryBtn, onClick: n, children: "Reessayer" })
+  return /* @__PURE__ */ s("div", { style: e.centerScreen, children: [
+    /* @__PURE__ */ i("div", { style: e.errorIcon, children: "⚠" }),
+    /* @__PURE__ */ i("div", { style: { fontSize: 15, fontWeight: 600, color: e.textPrimary }, children: "Erreur" }),
+    /* @__PURE__ */ i("div", { style: e.messageText, children: t }),
+    /* @__PURE__ */ i("button", { style: e.secondaryBtn, onClick: n, children: "Reessayer" })
   ] });
 }
 function de({
@@ -510,31 +526,30 @@ function de({
   s: t,
   showAvatar: n,
   showSnippet: r,
-  onClick: i
+  onClick: o
 }) {
-  var d, s;
-  const [a, f] = b(!1);
-  return /* @__PURE__ */ c(
+  const [a, u] = b(!1);
+  return /* @__PURE__ */ s(
     "div",
     {
       style: {
         ...t.emailItem(e.isUnread),
         background: a ? t.surfaceHover : "transparent"
       },
-      onClick: i,
-      onMouseEnter: () => f(!0),
-      onMouseLeave: () => f(!1),
+      onClick: o,
+      onMouseEnter: () => u(!0),
+      onMouseLeave: () => u(!1),
       children: [
-        e.isUnread && /* @__PURE__ */ o("div", { style: t.unreadIndicator }),
-        n && /* @__PURE__ */ o("div", { style: t.avatar, children: B(e.from) }),
-        /* @__PURE__ */ c("div", { style: t.emailBody, children: [
-          /* @__PURE__ */ c("div", { style: t.emailHeaderRow, children: [
-            /* @__PURE__ */ o("span", { style: t.emailFrom(e.isUnread), children: ((d = e.from) == null ? void 0 : d.name) || ((s = e.from) == null ? void 0 : s.email) || "Inconnu" }),
-            /* @__PURE__ */ o("span", { style: t.emailDate, children: Q(e.date) })
+        e.isUnread && /* @__PURE__ */ i("div", { style: t.unreadIndicator }),
+        n && /* @__PURE__ */ i("div", { style: t.avatar, children: B(e.from) }),
+        /* @__PURE__ */ s("div", { style: t.emailBody, children: [
+          /* @__PURE__ */ s("div", { style: t.emailHeaderRow, children: [
+            /* @__PURE__ */ i("span", { style: t.emailFrom(e.isUnread), children: e.from?.name || e.from?.email || "Inconnu" }),
+            /* @__PURE__ */ i("span", { style: t.emailDate, children: Q(e.date) })
           ] }),
-          /* @__PURE__ */ o("div", { style: t.emailSubject(e.isUnread), children: e.subject }),
-          r && /* @__PURE__ */ o("div", { style: t.emailSnippet, children: e.snippet }),
-          e.isStarred && /* @__PURE__ */ o("span", { style: t.starLabel, children: "★" })
+          /* @__PURE__ */ i("div", { style: t.emailSubject(e.isUnread), children: e.subject }),
+          r && /* @__PURE__ */ i("div", { style: t.emailSnippet, children: e.snippet }),
+          e.isStarred && /* @__PURE__ */ i("span", { style: t.starLabel, children: "★" })
         ] })
       ]
     }
@@ -545,16 +560,16 @@ function fe({
   s: t,
   showAvatar: n,
   showSnippet: r,
-  onSelect: i
+  onSelect: o
 }) {
-  return /* @__PURE__ */ o("div", { style: t.list, children: e.map((a) => /* @__PURE__ */ o(
+  return /* @__PURE__ */ i("div", { style: t.list, children: e.map((a) => /* @__PURE__ */ i(
     de,
     {
       email: a,
       s: t,
       showAvatar: n,
       showSnippet: r,
-      onClick: () => i(a)
+      onClick: () => o(a)
     },
     a.id
   )) });
@@ -564,26 +579,25 @@ function ue({
   s: t,
   onBack: n
 }) {
-  var i, a, f;
   const r = R(() => e.bodyHtml ? G(e.bodyHtml) : e.bodyText ? Y(e.bodyText) : "<em>Aucun contenu</em>", [e.bodyHtml, e.bodyText]);
-  return /* @__PURE__ */ c("div", { style: t.detailContainer, children: [
-    /* @__PURE__ */ c("div", { style: t.header, children: [
-      /* @__PURE__ */ o("button", { style: t.iconBtn, onClick: n, title: "Retour", children: "←" }),
-      /* @__PURE__ */ o("span", { style: { fontSize: 13, color: t.textSecondary }, children: "Detail" }),
-      /* @__PURE__ */ o("div", { style: { width: 32 } })
+  return /* @__PURE__ */ s("div", { style: t.detailContainer, children: [
+    /* @__PURE__ */ s("div", { style: t.header, children: [
+      /* @__PURE__ */ i("button", { style: t.iconBtn, onClick: n, title: "Retour", children: "←" }),
+      /* @__PURE__ */ i("span", { style: { fontSize: 13, color: t.textSecondary }, children: "Detail" }),
+      /* @__PURE__ */ i("div", { style: { width: 32 } })
     ] }),
-    /* @__PURE__ */ c("div", { style: t.detailHeader, children: [
-      /* @__PURE__ */ o("h2", { style: t.detailSubject, children: e.subject }),
-      /* @__PURE__ */ c("div", { style: t.detailMeta, children: [
-        /* @__PURE__ */ o("div", { style: t.detailAvatar, children: B(e.from) }),
-        /* @__PURE__ */ c("div", { children: [
-          /* @__PURE__ */ o("div", { style: t.detailFrom, children: ((i = e.from) == null ? void 0 : i.name) || ((a = e.from) == null ? void 0 : a.email) || "Inconnu" }),
-          /* @__PURE__ */ o("div", { style: t.detailTo, children: "a moi" })
+    /* @__PURE__ */ s("div", { style: t.detailHeader, children: [
+      /* @__PURE__ */ i("h2", { style: t.detailSubject, children: e.subject }),
+      /* @__PURE__ */ s("div", { style: t.detailMeta, children: [
+        /* @__PURE__ */ i("div", { style: t.detailAvatar, children: B(e.from) }),
+        /* @__PURE__ */ s("div", { children: [
+          /* @__PURE__ */ i("div", { style: t.detailFrom, children: e.from?.name || e.from?.email || "Inconnu" }),
+          /* @__PURE__ */ i("div", { style: t.detailTo, children: "a moi" })
         ] }),
-        /* @__PURE__ */ o("div", { style: t.detailDate, children: (f = e.date) == null ? void 0 : f.toLocaleString("fr-FR") })
+        /* @__PURE__ */ i("div", { style: t.detailDate, children: e.date?.toLocaleString("fr-FR") })
       ] })
     ] }),
-    /* @__PURE__ */ o(
+    /* @__PURE__ */ i(
       "div",
       {
         style: t.detailBody,
@@ -593,9 +607,9 @@ function ue({
   ] });
 }
 function ge() {
-  const e = $(), { mode: t } = q(), n = N(), r = ie(t), [i, a] = b("loading"), [f, d] = b([]), [s, h] = b(null), [S, p] = b(""), [T, C] = b(!1), g = D(null), v = R(
-    () => f.filter((l) => l.isUnread).length,
-    [f]
+  const e = $(), { mode: t } = q(), n = N(), r = ie(t), [o, a] = b("loading"), [u, f] = b([]), [c, h] = b(null), [S, p] = b(""), [T, C] = b(!1), g = D(null), v = R(
+    () => u.filter((l) => l.isUnread).length,
+    [u]
   ), m = y(async () => {
     C(!0);
     try {
@@ -603,50 +617,50 @@ function ge() {
         maxResults: n.maxEmails || 10
       };
       n.labelFilter && n.labelFilter !== "ALL" && (l.labelIds = [n.labelFilter]), n.showUnreadOnly && (l.query = "is:unread");
-      const u = await ee(e, l);
-      u.length === 0 ? (d([]), a("empty")) : (d(u), a("list"));
+      const d = await ee(e, l);
+      d.length === 0 ? (f([]), a("empty")) : (f(d), a("list"));
     } catch (l) {
-      const u = l instanceof Error ? l.message.toLowerCase() : "";
-      if (u.includes("not connected") || u.includes("403")) {
+      const d = l instanceof Error ? l.message.toLowerCase() : "";
+      if (d.includes("not connected") || d.includes("403")) {
         a("connect");
         return;
       }
-      u.includes("insufficient_scopes") ? p("Permissions Gmail insuffisantes. Reconnectez-vous.") : p("Impossible de charger les emails"), a("error");
+      d.includes("insufficient_scopes") ? p("Permissions Gmail insuffisantes. Reconnectez-vous.") : p("Impossible de charger les emails"), a("error");
     } finally {
       C(!1);
     }
   }, [e, n.maxEmails, n.labelFilter, n.showUnreadOnly]);
   w(() => {
     let l = !1;
-    async function u() {
+    async function d() {
       a("loading");
       const x = await ne(e);
       l || (x ? await m() : a("connect"));
     }
-    return u(), () => {
+    return d(), () => {
       l = !0;
     };
   }, []), w(() => {
     g.current && (clearInterval(g.current), g.current = null);
     const l = (n.refreshInterval || 5) * 60 * 1e3;
     return g.current = setInterval(() => {
-      s || m();
+      c || m();
     }, l), () => {
       g.current && clearInterval(g.current);
     };
-  }, [n.refreshInterval, s, m]);
+  }, [n.refreshInterval, c, m]);
   const E = D({
     label: n.labelFilter,
     unread: n.showUnreadOnly,
     max: n.maxEmails
   });
   w(() => {
-    const l = E.current, u = l.label !== n.labelFilter || l.unread !== n.showUnreadOnly || l.max !== n.maxEmails;
+    const l = E.current, d = l.label !== n.labelFilter || l.unread !== n.showUnreadOnly || l.max !== n.maxEmails;
     E.current = {
       label: n.labelFilter,
       unread: n.showUnreadOnly,
       max: n.maxEmails
-    }, u && (i === "list" || i === "empty") && m();
+    }, d && (o === "list" || o === "empty") && m();
   }, [n.labelFilter, n.showUnreadOnly, n.maxEmails]);
   const L = y(async () => {
     a("loading"), await re(e) ? await m() : a("connect");
@@ -654,8 +668,8 @@ function ge() {
     async (l) => {
       if (h(l), a("detail"), l.isUnread)
         try {
-          await te(e, l.id), d(
-            (u) => u.map(
+          await te(e, l.id), f(
+            (d) => d.map(
               (x) => x.id === l.id ? { ...x, isUnread: !1 } : x
             )
           );
@@ -670,13 +684,13 @@ function ge() {
   }, [m]), M = y(() => {
     m();
   }, [m]);
-  return /* @__PURE__ */ c("div", { style: r.container, children: [
-    i === "list" && /* @__PURE__ */ c("div", { style: r.header, children: [
-      /* @__PURE__ */ c("div", { style: { display: "flex", alignItems: "center" }, children: [
-        /* @__PURE__ */ o("h1", { style: r.headerTitle, children: "Emails" }),
-        v > 0 && /* @__PURE__ */ o("span", { style: r.badge, children: v > 99 ? "99+" : v })
+  return /* @__PURE__ */ s("div", { style: r.container, children: [
+    o === "list" && /* @__PURE__ */ s("div", { style: r.header, children: [
+      /* @__PURE__ */ s("div", { style: { display: "flex", alignItems: "center" }, children: [
+        /* @__PURE__ */ i("h1", { style: r.headerTitle, children: "Emails" }),
+        v > 0 && /* @__PURE__ */ i("span", { style: r.badge, children: v > 99 ? "99+" : v })
       ] }),
-      /* @__PURE__ */ o(
+      /* @__PURE__ */ i(
         "button",
         {
           style: {
@@ -690,21 +704,21 @@ function ge() {
         }
       )
     ] }),
-    i === "connect" && /* @__PURE__ */ o(ae, { s: r, onConnect: L }),
-    i === "loading" && /* @__PURE__ */ o(le, { s: r }),
-    i === "empty" && /* @__PURE__ */ o(se, { s: r, onRefresh: k }),
-    i === "error" && /* @__PURE__ */ o(ce, { s: r, message: S, onRetry: M }),
-    i === "list" && /* @__PURE__ */ o(
+    o === "connect" && /* @__PURE__ */ i(ae, { s: r, onConnect: L }),
+    o === "loading" && /* @__PURE__ */ i(le, { s: r }),
+    o === "empty" && /* @__PURE__ */ i(se, { s: r, onRefresh: k }),
+    o === "error" && /* @__PURE__ */ i(ce, { s: r, message: S, onRetry: M }),
+    o === "list" && /* @__PURE__ */ i(
       fe,
       {
-        emails: f,
+        emails: u,
         s: r,
         showAvatar: n.showAvatar ?? !0,
         showSnippet: n.showSnippet ?? !0,
         onSelect: P
       }
     ),
-    i === "detail" && s && /* @__PURE__ */ o(ue, { email: s, s: r, onBack: O })
+    o === "detail" && c && /* @__PURE__ */ i(ue, { email: c, s: r, onBack: O })
   ] });
 }
 export {
